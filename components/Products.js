@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CartContext } from "@/lib/CartContext";
 import { useContext } from "react";
+import toast from "react-hot-toast";
 
 const formatPrice = (price) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -48,7 +49,10 @@ export default function Products({ products }) {
                         </p>
 
                         <button
-                          onClick={() => {addProduct(product._id)}}
+                          onClick={() => {
+                            addProduct(product._id);
+                            toast.success("New item added to cart");
+                          }}
                           type="button"
                           className="flex items-center divide-x rounded-lg border border-primary bg-white text-center text-md font-medium text-secondary-700 shadow-sm hover:bg-gray-100"
                         >

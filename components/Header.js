@@ -14,7 +14,7 @@ export default function Header () {
     const inactive = "text-gray-500 transition hover:text-gray-500/75";
     return (
       <>
-        <header className="bg-white border-b border-primary border-opacity-40">
+        <header className="bg-white border-b border-primary border-opacity-40 sticky top-0 z-40">
           <div className="mx-auto flex h-16 max-w-screen-2xl items-center gap-8 px-4 sm:px-6 lg:px-8">
             <Link className="flex items-center gap-1 text-primary" href="#">
               <span className="sr-only">Home</span>
@@ -87,7 +87,7 @@ export default function Header () {
                         d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
                       />
                     </svg>
-                    <span  className="ml-2 text-primary font-bold group-hover:text-text">
+                    <span className="ml-2 text-primary font-bold group-hover:text-text">
                       {cartProducts.length}
                     </span>
                   </Link>
