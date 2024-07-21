@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import Header from "../components/Header";
 import { Raleway } from "next/font/google";
 import { CartContextProvider } from "@/lib/CartContext";
+import { Toaster } from "react-hot-toast";
 
 
 const inter = Raleway({ subsets: ["latin"], weight: "400" });
@@ -16,6 +17,10 @@ export default function App({ Component, pageProps }) {
         >
           <Header />
           <Component {...pageProps} />;
+          <Toaster 
+            position="top-center"
+            reverseOrder={false}
+          />
         </main>
       </CartContextProvider>
     </>
