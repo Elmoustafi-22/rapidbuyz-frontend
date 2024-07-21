@@ -1,6 +1,13 @@
+import { CartContext } from "@/lib/CartContext";
 import Link from "next/link";
+import { useContext } from "react";
 
 export default function Hero({ product }) {
+  const { addProduct } = useContext(CartContext)
+
+  function addItemToCart() {
+    addProduct(product._id);
+  }
   if (product) {
     return (
       <div className="relative overflow-hidden my-14 md:my-10">
@@ -20,6 +27,7 @@ export default function Hero({ product }) {
                 <button
                   type="button"
                   className="rounded-lg border border-primary-500 bg-primary px-5 py-2.5 text-center text-md font-medium text-white shadow-sm transition-all hover:border-primary-700 hover:bg-secondary focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300"
+                  onClick={addItemToCart}
                 >
                   Add to Cart
                 </button>
