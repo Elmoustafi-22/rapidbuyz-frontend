@@ -45,7 +45,7 @@ export default function Products({ products }) {
 
                       <div className="mt-1.5 flex items-center justify-between text-text">
                         <p className="tracking-wide text-primary">
-                          {formatPrice(product.price)} Naira.
+                          $. {formatPrice(product.price)}
                         </p>
 
                         <button

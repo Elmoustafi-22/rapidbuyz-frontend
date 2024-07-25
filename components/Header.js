@@ -2,11 +2,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { CartContext } from "@/lib/CartContext";
+import { signOut, useSession } from "next-auth/react";
 export default function Header () {
 
     const router = useRouter();
 
     const {pathname} = router;
+
+    const {  data: session } = useSession();
 
     const {cartProducts} = useContext(CartContext)
 
@@ -14,9 +17,9 @@ export default function Header () {
     const inactive = "text-gray-500 transition hover:text-gray-500/75";
     return (
       <>
-        <header className="bg-white border-b border-primary border-opacity-40 sticky top-0 z-40">
-          <div className="mx-auto flex h-16 max-w-screen-2xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-            <Link className="flex items-center gap-1 text-primary" href="#">
+        <header className="bg-white border-b border-primary border-opacity-40 sticky top-0 z-40 px-2 md:px-4 w-full">
+          <div className="mx-auto flex h-16 max-w-screen-2xl items-center gap-8 sm:px-6 lg:px-8">
+            <Link className="flex items-center gap-1 text-primary" href="/">
               <span className="sr-only">Home</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,17 +64,50 @@ export default function Header () {
               </nav>
 
               <div className="flex items-center gap-4">
-                <div className="sm:flex sm:gap-4">
-                  <Link
-                    className="px-5 py-2.5 text-sm text-center font-medium transition border-r border-primary"
-                    href="#"
-                  >
-                    Account
-                  </Link>
+                {session ? (
+                  <div className="sm:flex sm:gap-2 border-r border-primary pr-3">
+                    <div className="h-9 w-9">
+                      <img
+                        class="h-full w-full rounded-full object-cover object-center"
+                        src={session.user.image}
+                        alt={session.user.email}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="sm:flex sm:gap-4">
+                    <Link
+                      className="text-sm text-center font-medium transition border-r border-primary"
+                      href="#"
+                    >
+                      Account
+                    </Link>
+                    <Link
+                      className=" text-md font-medium text-text hidden max-md:flex md:hidden"
+                      href="/"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                    </Link>
+                  </div>
+                )}
 
+                <div className="ml-2 flow-root lg:ml-1">
                   <Link
-                    className="group px-5 py-2.5 rounded-md text-md flex items-center font-medium text-teal-600 transition hover:text-teal-600/75 p-2"
-                    href="#"
+                    className="group text-md flex items-center font-medium text-teal-600 transition hover:text-teal-600/75"
+                    href="/cart"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
